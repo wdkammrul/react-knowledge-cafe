@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import Blog from "../Blog/Blog";
 
 const Blogs = () => {
 
@@ -7,17 +8,26 @@ const Blogs = () => {
     const [blogs, setBlogs] = useState([]);
 
     // ***** step-2 use Effect *****
-    useEffect(() =>{
+    useEffect(() => {
         fetch('blogs.json')
-        .then(res => res.json())
-        .then(data => setBlogs(data))
+            .then(res => res.json())
+            .then(data => setBlogs(data))
     }, [])
 
     return (
         <div className="md:w-2/3">
 
             {/* ***** step-3 blogs length then create blog components*****  */}
-            <h3>Blogs:{blogs.length}</h3>
+            <h3 className="text-4xl">Blogs:{blogs.length}</h3>
+
+            {/* ***** step-4 maping *****  */}
+            {
+                blogs.map(blog => <Blog
+                    key={blog.id}
+                    blog={blog}
+                ></Blog>)
+            }
+
         </div>
     );
 };
