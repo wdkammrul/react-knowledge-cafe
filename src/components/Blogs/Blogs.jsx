@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Blog from "../Blog/Blog";
 
-const Blogs = () => {
+// ***** step-12 props *****
+const Blogs = ({ handleAddToBookmarks }) => {
 
     //  ***** step-1 use state *****
     const [blogs, setBlogs] = useState([]);
@@ -18,13 +19,17 @@ const Blogs = () => {
         <div className="md:w-2/3">
 
             {/* ***** step-3 blogs length then create blog components*****  */}
-            <h3 className="text-4xl">Blogs:{blogs.length}</h3>
+            <h3 className="text-4xl mb-8">Blogs:{blogs.length}</h3>
 
-            {/* ***** step-4 maping *****  */}
+            {/* ***** step-4 mapping *****  */}
             {
                 blogs.map(blog => <Blog
                     key={blog.id}
                     blog={blog}
+                    // ***** step-13 *****
+                    handleAddToBookmarks={handleAddToBookmarks}
+
+
                 ></Blog>)
             }
 
