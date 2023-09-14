@@ -2,12 +2,13 @@ import PropTypes from 'prop-types';
 import { FaBookmark } from 'react-icons/fa';
 
 //  ***** step-5 props blog******
-//  ***** step-14 resive handleAddToBookmarks ***** 
-const Blog = ({ blog, handleAddToBookmarks }) => {
+//  ***** step-14 receive handleAddToBookmarks *****
+// ***** step-28 receive handleMarksAsRead*****
+const Blog = ({ blog, handleAddToBookmarks, handleMarksAsRead }) => {
     // console.log(blog)
 
     //  ***** step-6 ******
-    const { title, cover, author, author_img, posted_date, reading_time, hashtags } = blog;
+    const {id, title, cover, author, author_img, posted_date, reading_time, hashtags } = blog;
 
 
     return (
@@ -27,10 +28,10 @@ const Blog = ({ blog, handleAddToBookmarks }) => {
                     <span>{reading_time} min read</span>
 
                     {/* step-8 bookmark add by react icons */}
-                    <button 
-                    //  ***** step-15 onClick call *****
-                    onClick={handleAddToBookmarks}
-                    className='ml-3 text-red-600'
+                    <button
+                        //  ***** step-15 onClick call *****
+                        onClick={handleAddToBookmarks}
+                        className='ml-3 text-red-600'
                     ><FaBookmark></FaBookmark></button>
                 </div>
             </div>
@@ -43,13 +44,24 @@ const Blog = ({ blog, handleAddToBookmarks }) => {
                     hashtags.map((hash, idx) => <span className='mr-5' key={idx}><a href="">#{hash}</a></span>)
                 }
             </p>
+
+            {/* ***** step-29 ***** */}
+            <button
+
+                //***** step-30 set onClick and send reading_time ***** 
+                //***** step-35 remove bookmark id pass ******
+                onClick={() => handleMarksAsRead(id,reading_time)}
+                className='mt-5 text-purple-800 font-bold underline'
+            >Mark As Read</button>
         </div>
     );
 };
 
 //  ***** step - 5 props blog copy prop types react ******
 Blog.propTypes = {
-    blog: PropTypes.object.isRequired
+    blog: PropTypes.object.isRequired,
+    handleAddToBookmarks: PropTypes.func,
+    handleMarksAsRead: PropTypes.func
 }
 
 export default Blog;
